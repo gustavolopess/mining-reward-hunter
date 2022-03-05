@@ -1,7 +1,11 @@
+import bodyParser from 'body-parser';
 import express from 'express';
 import { Router, Request, Response } from 'express';
+import CoinsRouter from './routes/coins.route';
 
 const app = express();
+
+app.use('/coins', CoinsRouter);
 
 const route = Router()
 
@@ -13,5 +17,4 @@ route.get('/', (req: Request, res: Response) => {
 
 app.use(route)
 
-
-app.listen(3333, () => 'server running on port 3333')
+app.listen(3333, () => 'server running on port 3333');
