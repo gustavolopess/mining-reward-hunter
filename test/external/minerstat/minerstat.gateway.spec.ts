@@ -31,6 +31,28 @@ describe('MinerstatGateway', () => {
                     expect(listOfCoins).toEqual(expectedListOfPools);
                 });
             });
+
+            describe('and the response does not contain any pool data', () => {
+                const apiResponse = [ 
+                    Builder<CoinDto>().type('coin').build(),
+                    Builder<CoinDto>().type('coin').build()
+                ];
+
+                const expectedListOfPools = [];
+
+                beforeAll(() => {
+                    mockedAxios.get = jest.fn().mockResolvedValue({
+                        data: apiResponse
+                    });
+                });
+
+                it('should return an empty list', async () => {
+                    const listOfCoins = await gateway.listRewardableMiningPools();
+                    expect(mockedAxios.get).toHaveBeenCalledWith(`${process.env.MINERSTAT_URL}/v2/coins`);
+                    expect(listOfCoins).toEqual(expectedListOfPools);
+                });
+            });
+
         });
 
         describe('when call to Minerstat API fail', () => {
