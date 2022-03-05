@@ -2,7 +2,7 @@ export interface CoinDto {
     id: string;
     coin: string;
     name: string;
-    type: string;
+    type: 'coin' | 'pool';
     algorithm: string;
     network_hashrate: number;
     difficulty: number;
