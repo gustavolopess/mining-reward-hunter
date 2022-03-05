@@ -1,4 +1,4 @@
-import bodyParser from 'body-parser';
+require('dotenv').config();
 import express from 'express';
 import { Router, Request, Response } from 'express';
 import CoinsRouter from './routes/coins.route';
